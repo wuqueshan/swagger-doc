@@ -1,0 +1,693 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger接口文档",
+    "description": "飞飞鸟",
+    "contact": {
+      "name": "李飞",
+      "url": "https://www.feifeiniao.com",
+      "email": "wuqueshan@qq.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:9500/api/v1.0",
+      "description": "开发环境"
+    },
+    {
+      "url": "http://192.168.1.159:9500/api/v1.0",
+      "description": "测试环境"
+    }
+  ],
+  "paths": {
+    "/user/message/get?user_id={user_id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "获取会员信息",
+        "description": "",
+        "operationId": "user.message.get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "会员id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": "xxx"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回值",
+            "content": {
+              "success": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "properties": {
+                        "user_id": {
+                          "description": "用户Id",
+                          "type": "integer",
+                          "nullable": false
+                        },
+                        "username": {
+                          "description": "用户名",
+                          "type": "string",
+                          "nullable": false
+                        },
+                        "phone": {
+                          "description": "手机号",
+                          "type": "string",
+                          "nullable": false
+                        },
+                        "nick_name": {
+                          "description": "昵称",
+                          "type": "string",
+                          "nullable": false
+                        },
+                        "sex": {
+                          "description": "性别 0未知1男|2女",
+                          "type": "integer",
+                          "nullable": false
+                        },
+                        "avatar": {
+                          "description": "头像",
+                          "type": "string",
+                          "nullable": false
+                        },
+                        "login_type": {
+                          "description": "登陆方式 1短信验证码|2手机号密码|3账号密码|4微信|5QQ",
+                          "type": "integer",
+                          "nullable": false
+                        },
+                        "last_login_at": {
+                          "description": "登陆时间",
+                          "type": "string",
+                          "nullable": false
+                        },
+                        "status": {
+                          "description": "状态 1正常｜-1禁用",
+                          "type": "integer",
+                          "nullable": false
+                        },
+                        "clientid": {
+                          "description": "push推送用户clientid",
+                          "type": "string"
+                        },
+                        "in_blacklist": {
+                          "description": "A用户是否在登陆用户得黑名单中 1在|0不在",
+                          "type": "integer"
+                        },
+                        "security": {
+                          "description": "账户安全数据",
+                          "properties": {
+                            "phone": {
+                              "description": "电话号",
+                              "type": "string",
+                              "nullable": false
+                            },
+                            "is_set_pwd": {
+                              "description": "是否设置密码0未设置|1设置",
+                              "type": "integer",
+                              "nullable": false
+                            },
+                            "is_set_pay_pwd": {
+                              "description": "是否设置支付密码0未设置|1设置",
+                              "type": "integer",
+                              "nullable": false
+                            },
+                            "is_auth": {
+                              "description": "是否实名认证0未认证|1认证",
+                              "type": "integer",
+                              "nullable": false
+                            },
+                            "auth_infos": {
+                              "description": "认证信息 未认证时为空数组,认证后为认证相关信息",
+                              "properties": {
+                                "cert_type": {
+                                  "description": "实名认证类型1身份证|2港澳通行证|3台湾通行证|4外国护照",
+                                  "type": "integer",
+                                  "nullable": false
+                                },
+                                "cert_name": {
+                                  "description": "真实姓名",
+                                  "type": "string",
+                                  "nullable": false
+                                },
+                                "cert_number": {
+                                  "description": "证件号",
+                                  "type": "string",
+                                  "nullable": false
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "third_infos": {
+                              "description": "绑定的第三方信息",
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "third_type": {
+                                    "description": "第三方类型 1微信|2QQ|3微博",
+                                    "type": "integer"
+                                  },
+                                  "third_info": {
+                                    "description": "第三方信息 空数组时说明该类型未绑定",
+                                    "properties": {
+                                      "nick_name": {
+                                        "description": "第三方昵称",
+                                        "type": "string"
+                                      },
+                                      "avatar": {
+                                        "description": "第三方头像",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 200,
+                    "message": "Success",
+                    "data": {
+                      "user": {
+                        "id": 1,
+                        "username": "test",
+                        "phone": "xxxxxxxxxxx",
+                        "nick_name": "test",
+                        "sex": "1",
+                        "avatar": "",
+                        "last_login_at": "2020-06-02 09:35:42",
+                        "created_at": "2020-05-15 10:56:20",
+                        "updated_at": "2020-06-02 09:35:42",
+                        "login_type": "2",
+                        "status": "1",
+                        "is_auth": "0",
+                        "birthday": "",
+                        "school": "",
+                        "words": "",
+                        "addr": "",
+                        "taob": "0",
+                        "security": {
+                          "phone": "xxxxxxxxxxx",
+                          "is_set_pwd": 1,
+                          "is_set_pay_pwd": 0,
+                          "is_auth": 0,
+                          "auth_infos": [],
+                          "third_infos": [
+                            {
+                              "third_type": 1,
+                              "third_info": {
+                                "nick_name": "third",
+                                "avatar": "headimg"
+                              }
+                            },
+                            {
+                              "third_type": 2,
+                              "third_info": []
+                            },
+                            {
+                              "third_type": 3,
+                              "third_info": []
+                            }
+                          ]
+                        }
+                      },
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTkxMDYxNzQyLCJuYmYiOjE1OTEwNjE3NDIsImV4cCI6MTU5MTA2ODk0MiwiaWQiOjF9.WmJDJX6Q4-7n1U0OS27LxiM8hX5Tw27aI0umedIfITk",
+                      "expires_in": 7200
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "失败的原因",
+                      "type": "string",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 1,
+                    "result": {
+                      "code": "-1",
+                      "message": "",
+                      "data": ""
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/common/recommendSearch?token={token}": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "首页推荐",
+        "description": "根据用户注册时选择的兴趣标签，进行首页推荐信息的调用",
+        "operationId": "search.common.recommenSearch",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "xxx"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "type_id": {
+                    "description": "数据分类id，值为0时取全部分类数据",
+                    "type": "integer",
+                    "nullable": false
+                  },
+                  "page": {
+                    "description": "页码",
+                    "type": "integer",
+                    "nullable": false
+                  },
+                  "page_size": {
+                    "description": "每页显示条数",
+                    "type": "integer",
+                    "nullable": true
+                  }
+                },
+                "type": "object",
+                "example": {
+                  "type_id": 1,
+                  "page": 1,
+                  "page_size": 3
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "返回值",
+            "content": {
+              "success": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "description": "数据",
+                      "type": "json",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 200,
+                    "message": "Success",
+                    "data": {
+                      "list": [
+                        {
+                          "id": 1,
+                          "user_id": 950,
+                          "type_id": 2,
+                          "create_time": 1589802327,
+                          "edit_time": 1589802327,
+                          "published_time": 1589802327,
+                          "status": 2,
+                          "cover_id": 1,
+                          "title": "文艺复兴在中国的愿景",
+                          "created_at": "2020-05-1819:45:27",
+                          "updated_at": "2020-05-1819:45:27",
+                          "deleted_at": null,
+                          "goods": [
+                            {
+                              "id": 7,
+                              "title": "文艺复兴在中国的愿景",
+                              "price": "¥167",
+                              "img": "https://www.feifeiniao.com/image/video.png"
+                            }
+                          ],
+                          "_tag": [],
+                          "_data": null,
+                          "_relation": {
+                            "collect": {
+                              "num": 99,
+                              "status": 0
+                            },
+                            "praise": {
+                              "num": 43,
+                              "status": 1
+                            },
+                            "follow": {
+                              "status": 0
+                            }
+                          }
+                        }
+                      ],
+                      "perPage": 1,
+                      "currentPage": 1,
+                      "total": 18,
+                      "count": 1,
+                      "hasMorePages": 1
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "description": "数据",
+                      "type": "json",
+                      "nullable": true
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 404,
+                    "message": "Error",
+                    "data": {
+                      "error": {
+                        "root_cause": [
+                          {
+                            "type": "index_not_found_exception",
+                            "reason": "no such index {recommends}",
+                            "resource.type": "index_or_alias",
+                            "resource.id": "recommends",
+                            "index_uuid": "_na_",
+                            "index": "recommends"
+                          }
+                        ],
+                        "type": "index_not_found_exception",
+                        "reason": "no such index {recommends}",
+                        "resource.type": "index_or_alias",
+                        "resource.id": "recommends",
+                        "index_uuid": "_na_",
+                        "index": "recommends"
+                      },
+                      "status": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/item/delete?id={id}": {
+      "delete": {
+        "tags": [
+          "content"
+        ],
+        "summary": "删除文章",
+        "description": "删除指定ID的文章",
+        "operationId": "content.item.delete",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "用于保持登录状态",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "文章ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回值",
+            "content": {
+              "success": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "description": "数据",
+                      "type": "boolean",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 200,
+                    "message": "Success",
+                    "data": true
+                  }
+                }
+              },
+              "fail": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 0,
+                    "message": "失败",
+                    "data": []
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mall/message/addressUpdate": {
+      "put": {
+        "tags": [
+          "mall"
+        ],
+        "summary": "地址修改",
+        "description": "用户修改自己的地址",
+        "operationId": "mall.message.addressUpdate",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "用于获取登录状态",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": ""
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "addressId": {
+                    "description": "地址ID",
+                    "type": "integer",
+                    "nullable": false
+                  },
+                  "address": {
+                    "description": "地址",
+                    "type": "object",
+                    "nullable": false
+                  },
+                  "asDefault": {
+                    "description": "作为默认地址",
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                },
+                "type": "object",
+                "example": {
+                  "addressId": 1,
+                  "address": {
+                    "first_name": "Dipsy",
+                    "telephone": "xxxxxxxxxxx",
+                    "address": "Teletubbyland",
+                    "province": 1,
+                    "city": 2,
+                    "zone": 3
+                  },
+                  "asDefault": false
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "返回值",
+            "content": {
+              "success": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "description": "数据",
+                      "type": "boolean",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 200,
+                    "message": "Success",
+                    "data": true
+                  }
+                }
+              },
+              "fail": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "状态码",
+                      "type": "integer",
+                      "nullable": false
+                    },
+                    "message": {
+                      "description": "消息",
+                      "type": "string",
+                      "nullable": false
+                    },
+                    "data": {
+                      "description": "数据",
+                      "type": "object",
+                      "nullable": false
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "code": 0,
+                    "message": "失败",
+                    "data": []
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "communal",
+      "description": "通用服务",
+      "externalDocs": {
+        "description": "更多资料",
+        "url": "https://www.feifeiniao.com/api/communal"
+      }
+    },
+    {
+      "name": "user",
+      "description": "用户中心",
+      "externalDocs": {
+        "description": "更多资料",
+        "url": "https://www.feifeiniao.com/api/user"
+      }
+    },
+    {
+      "name": "content",
+      "description": "内容服务",
+      "externalDocs": {
+        "description": "更多资料",
+        "url": "https://www.feifeiniao.com/api/content"
+      }
+    }
+  ]
+}
